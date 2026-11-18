@@ -1,14 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>CREDITRAB - Crédito Digital para los Trabajadores</title>
+
   <style>
     :root {
       --dorado: #c99d26;
-      --fondo: #ffffff;
-      --texto: #333333;
+      --fondo: #121212;
+      --texto: #e0e0e0;
+      --fondo-header: #1c1c1c;
+      --fondo-servicio: #242424;
+      --texto-secundario: #aaaaaa;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -20,14 +30,16 @@
     }
 
     header {
-      background: var(--fondo);
-      padding: 1rem 2rem;
+      background: var(--fondo-header);
+      padding: 1.5rem 2rem;
       text-align: center;
       border-bottom: 2px solid var(--dorado);
     }
 
     header img {
       height: 70px;
+      max-width: 100%;
+      object-fit: contain;
     }
 
     header h1 {
@@ -38,7 +50,7 @@
     header p {
       margin: 0;
       font-style: italic;
-      color: #666;
+      color: var(--texto-secundario);
     }
 
     section {
@@ -52,6 +64,10 @@
       margin-top: 1.5rem;
     }
 
+    section h3 {
+      color: var(--dorado);
+    }
+
     .servicios {
       display: flex;
       flex-wrap: wrap;
@@ -60,15 +76,25 @@
 
     .servicio {
       flex: 1 1 300px;
-      background: #f8f8f8;
-      padding: 1rem;
+      background: var(--fondo-servicio);
+      padding: 1.5rem;
       border-left: 5px solid var(--dorado);
-      border-radius: 6px;
+      border-radius: 8px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .servicio:hover {
+      transform: translateY(-4px);
+    }
+
+    .servicio p {
+      color: #cccccc;
     }
 
     footer {
       background: var(--dorado);
-      color: white;
+      color: #ffffff;
       text-align: center;
       padding: 1rem;
       margin-top: 2rem;
@@ -79,89 +105,199 @@
       text-decoration: none;
     }
 
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .boton {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.2rem;
+      background-color: var(--dorado);
+      color: white;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .boton:hover {
+      background-color: #a77f16;
+      text-decoration: none;
+    }
+
     @media (max-width: 600px) {
+      header {
+        padding: 1rem;
+      }
+
       header img {
         height: 50px;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
       }
 
       section {
         padding: 1rem;
       }
+
+      .servicios {
+        gap: 1rem;
+      }
+
+      .servicio {
+        flex: 1 1 100%;
+      }
     }
   </style>
 </head>
+
 <body>
 
+  <!-- ENCABEZADO -->
   <header>
     <img src="logoct.jpg" alt="Logo Creditrab" />
+
     <h1>Credito Digital para los Trabajadores</h1>
+
     <p>Ideas y Soluciones para el Trabajador</p>
   </header>
 
+  <!-- QUIENES SOMOS -->
   <section>
     <h2>¿Quiénes somos?</h2>
+
     <p>
-      En <strong>CREDITRAB</strong>, ofrecemos soluciones financieras innovadoras que permiten a trabajadores ( Emprendedores o comerciantes ) poder vender sus productos y/o servicios al crédito. Nos especializamos en tecnología financiera ( FinTech ) enfocada en el bienestar social y laboral. Nuestro principal proposito es apoyar al pequeño emprendedor y pequeños comercios, facilitandoles una plataforma digital que les dara acceso a un nicho de mercado unico y seguro, como lo son los trabajadores o empleados de empresas que esten afiliadas a nuestra <strong>RED PATRONAL</strong>. Los empleados de estas empresas, logicamente tambien se beneficiaran de <strong>CREDITRAB</strong>, ya que tendran acceso sin costo alguno, a esta <strong>RED de POs VIRTUALES</strong> donde podran realizar compras al credito de productos de primera necesidad y todo aquel producto o servicio que los emprendedores ofrezcan. 
+      En <strong>CREDITRAB</strong>, ofrecemos soluciones financieras
+      innovadoras que permiten a trabajadores (emprendedores o comerciantes)
+      poder vender sus productos y/o servicios al crédito.
+
+      Nos especializamos en tecnología financiera (FinTech) enfocada en
+      el bienestar social y laboral.
+
+      Nuestro principal propósito es apoyar al pequeño emprendedor y
+      pequeños comercios, facilitándoles una plataforma digital que les
+      dará acceso a un nicho de mercado único y seguro, como lo son los
+      trabajadores o empleados de empresas que estén afiliadas a nuestra
+      <strong>RED PATRONAL</strong>.
+
+      Los empleados de estas empresas también se beneficiarán de
+      <strong>CREDITRAB</strong>, ya que tendrán acceso sin costo alguno
+      a esta <strong>RED de POS VIRTUALES</strong>, donde podrán realizar
+      compras al crédito de productos de primera necesidad y todo aquel
+      producto o servicio que los emprendedores ofrezcan.
     </p>
   </section>
 
+  <!-- NUESTROS SERVICIOS -->
   <section>
     <h2>Nuestros servicios</h2>
+
     <div class="servicios">
+
+      <!-- SERVICIO VPOS -->
       <div class="servicio">
-        <h3>Puntos de Venta Virtual ( VPOS )</h3>
-     <!--   <img src="logopos.jpg" alt="Punto de Venta Virtual" 
-     style="display: block; margin: 0 auto 1rem; max-width: 300px; height: auto;" /> -->
-        <p>
-          Ofrecemos plataformas de venta digital que permiten a comercios aceptar pagos sin necesidad de hardware físico. Nuestra solución es rápida, segura y diseñada para pequeños negocios. Control total desde una app móvil.
-        </p>
-      <a href="#" 
-   onclick="alert('¡Este servicio estará disponible próximamente!'); return false;" 
-   style="display:inline-block; margin-top:1rem; padding:0.6rem 1rem; background-color: var(--dorado); color: white; border-radius: 4px; text-align:center;">
-   Afiliacion de VPOS
-</a>
 
-      </div>
-      <div class="servicio">
-        <h3>Tarjetas de PLanilla Virtuales ( VPC )</h3>
-     <!--   <img src="logocard.jpg" alt="Punto de Venta Virtual"
-     style="display: block; margin: 0 auto 1rem; max-width: 300px; height: auto;" /> -->
+        <h3>Puntos de Venta Virtual (VPOS)</h3>
 
-
+        <!--
+        <img src="logopos.jpg"
+             alt="Punto de Venta Virtual"
+             style="display:block; margin:0 auto 1rem;
+             max-width:300px; height:auto;" />
+        -->
 
         <p>
-          Proporcionamos tarjetas digitales para compras al crédito, ideales para trabajadores que requieren cubrir necesidades basicas o sin acceso bancario tradicional. Control total desde una app móvil.
+          Ofrecemos plataformas de venta digital que permiten a comercios
+          aceptar pagos sin necesidad de hardware físico.
+
+          Nuestra solución es rápida, segura y diseñada para pequeños
+          negocios. Control total desde una app móvil.
         </p>
-      <a href="#" 
-   onclick="alert('¡Este servicio estará disponible próximamente!'); return false;" 
-   style="display:inline-block; margin-top:1rem; padding:0.6rem 1rem; background-color: var(--dorado); color: white; border-radius: 4px; text-align:center;">
-   Afiliacion Patronos
-</a>
+
+        <a href="#"
+           class="boton"
+           onclick="alert('¡Este servicio estará disponible próximamente!'); return false;">
+          Afiliación de VPOS
+        </a>
 
       </div>
+
+      <!-- SERVICIO VPC -->
+      <div class="servicio">
+
+        <h3>Tarjetas de Planilla Virtuales (VPC)</h3>
+
+        <!--
+        <img src="logocard.jpg"
+             alt="Tarjeta de Planilla Virtual"
+             style="display:block; margin:0 auto 1rem;
+             max-width:300px; height:auto;" />
+        -->
+
+        <p>
+          Proporcionamos tarjetas digitales para compras al crédito,
+          ideales para trabajadores que requieren cubrir necesidades
+          básicas o que no tienen acceso bancario tradicional.
+
+          Control total desde una app móvil.
+        </p>
+
+        <a href="#"
+           class="boton"
+           onclick="alert('¡Este servicio estará disponible próximamente!'); return false;">
+          Afiliación Patronos
+        </a>
+
+      </div>
+
     </div>
   </section>
 
+  <!-- COMO FUNCIONA -->
   <section>
     <h2>¿Cómo funciona?</h2>
+
     <p>
-      Nuestro sistema permite a los empleados de una empresa afiliada, realizar compras presenciales o remotas al crédito, con pagos quincenales o mensuales. Todo basado en Tokens de codigo QR. El monto se descontara directamente de la planilla de pago, lo que garantiza seguridad tanto para el comercio como para el cliente.
+      Nuestro sistema permite a los empleados de una empresa afiliada
+      realizar compras presenciales o remotas al crédito, con pagos
+      quincenales o mensuales.
+
+      Todo basado en tokens de código QR.
+
+      El monto se descontará directamente de la planilla de pago,
+      lo que garantiza seguridad tanto para el comercio como para
+      el cliente.
     </p>
+
     <p>
-      Gracias a nuestra plataforma móvil, todo el proceso se gestiona desde la palma de tu mano.
+      Gracias a nuestra plataforma móvil, todo el proceso se gestiona
+      desde la palma de tu mano.
     </p>
   </section>
 
+  <!-- CONTACTO -->
   <section>
     <h2>Contacto</h2>
+
     <p>
-      ¿Te interesa colaborar con nosotros o usar nuestros servicios? Escríbenos a <a href="mailto:contacto@creditrab.com">contacto@creditrab.com</a> y con gusto te responderemos.
+      ¿Te interesa colaborar con nosotros o usar nuestros servicios?
+
+      Escríbenos a
+      <a href="mailto:contacto@creditrab.com">
+        contacto@creditrab.com
+      </a>
+      y con gusto te responderemos.
     </p>
   </section>
 
+  <!-- PIE DE PAGINA -->
   <footer>
-  Copyright &copy; 2025 Datos y Aplicaciones en Linea
+    Copyright &copy; 2026 Datos y Aplicaciones en Línea
   </footer>
 
 </body>
 </html>
+

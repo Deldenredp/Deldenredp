@@ -1,301 +1,588 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CREDITRAB - Crédito Digital para los Trabajadores</title>
-
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --dorado: #c99d26;
-      --fondo: #121212;
-      --texto: #e0e0e0;
-      --fondo-header: #1c1c1c;
-      --fondo-servicio: #242424;
-      --texto-secundario: #aaaaaa;
-    }
 
-    * {
-      box-sizing: border-box;
-    }
+    .text-brand {
+    color: #c99e22;
+  }
+  .bg-brand {
+    background-color: #c99e22;
+  }
+  .hover\:bg-brand:hover {
+    background-color: #b4881d;
+  }
+  .border-brand {
+    border-color: #c99e22;
+  }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background-color: var(--fondo);
-      color: var(--texto);
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
     }
-
-    header {
-      background: var(--fondo-header);
-      padding: 1.5rem 2rem;
-      text-align: center;
-      border-bottom: 2px solid var(--dorado);
+    #mobileMenu {
+      transition: max-height 0.3s ease-in-out;
+      overflow: hidden;
     }
-
-    header img {
-      height: 70px;
-      max-width: 100%;
-      object-fit: contain;
-    }
-
-    header h1 {
-      color: var(--dorado);
-      margin: 0.5rem 0 0.2rem;
-    }
-
-    header p {
-      margin: 0;
-      font-style: italic;
-      color: var(--texto-secundario);
-    }
-
-    section {
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    section h2 {
-      color: var(--dorado);
-      margin-top: 1.5rem;
-    }
-
-    section h3 {
-      color: var(--dorado);
-    }
-
-    .servicios {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    .servicio {
-      flex: 1 1 300px;
-      background: var(--fondo-servicio);
-      padding: 1.5rem;
-      border-left: 5px solid var(--dorado);
-      border-radius: 8px;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .servicio:hover {
-      transform: translateY(-4px);
-    }
-
-    .servicio p {
-      color: #cccccc;
-    }
-
-    footer {
-      background: var(--dorado);
-      color: #ffffff;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-
-    a {
-      color: var(--dorado);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .boton {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.7rem 1.2rem;
-      background-color: var(--dorado);
-      color: white;
-      border-radius: 5px;
-      text-align: center;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .boton:hover {
-      background-color: #a77f16;
-      text-decoration: none;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        padding: 1rem;
-      }
-
-      header img {
-        height: 50px;
-      }
-
-      header h1 {
-        font-size: 1.5rem;
-      }
-
-      section {
-        padding: 1rem;
-      }
-
-      .servicios {
-        gap: 1rem;
-      }
-
-      .servicio {
-        flex: 1 1 100%;
-      }
+    #videoModal {
+      backdrop-filter: blur(4px);
     }
   </style>
+
+<style>
+  /* Adaptar inputs y textareas al modo claro/oscuro */
+  input, textarea {
+    background-color: white;
+    color: black;
+  }
+
+  .dark input, .dark textarea {
+    background-color: #1f2937; /* gris oscuro */
+    color: white;
+    border-color: #4b5563; /* gris más suave */
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #6b7280; /* gris claro */
+  }
+
+  .dark input::placeholder, .dark textarea::placeholder {
+    color: #9ca3af; /* gris más claro en dark mode */
+  }
+</style>
+
+
 </head>
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 bg-white dark:bg-gray-800 text-brand px-4 py-3 shadow">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <img src="logoct.png" alt="Logo de Creditrab - Crédito para trabajadores" class="h-10">
+        <span class="text-lg font-bold"></span>
+      </div>
+      <ul class="hidden md:flex space-x-6 font-semibold">
+        <li><a href="#inicio" class="relative inline-block px-2 py-1 text-brand  before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-0 before:bg-black before:transition-all before:duration-300 hover:before:w-full">Inicio</a></li>
+        
 
-<body>
+        <li><a href="#quienes" class="relative inline-block px-2 py-1 text-brand  before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-0 before:bg-black before:transition-all before:duration-300 hover:before:w-full">Quiénes somos</a></li>
+        <li><a href="#servicios" class="relative inline-block px-2 py-1 text-brand  before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-0 before:bg-black before:transition-all before:duration-300 hover:before:w-full">Servicios</a></li>
+        <li><a href="#beneficiarios" class="relative inline-block px-2 py-1 text-brand  before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-0 before:bg-black before:transition-all before:duration-300 hover:before:w-full">Beneficios</a></li>
+        <li><a href="#como-funciona" class="relative inline-block px-2 py-1 text-brand  before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-0 before:bg-black before:transition-all before:duration-300 hover:before:w-full">Funcionalidad</a></li> <!-- texto cambiado -->
+        <li><a href="#contacto" class="relative inline-block px-2 py-1 text-brand  before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-0 before:bg-black before:transition-all before:duration-300 hover:before:w-full">Contacto</a></li>
+      </ul>
+      <div class="flex items-center space-x-4">
+        <button id="themeToggle" aria-label="Cambiar tema" class="text-brand text-xl focus:outline-none">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="menuBtn" aria-label="Abrir menú" class="md:hidden text-brand focus:outline-none">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+    <ul id="mobileMenu" class="md:hidden max-h-0 overflow-hidden flex-col space-y-2 mt-2 px-4 font-semibold">
+      <li><a href="#inicio" class="block hover:underline">Inicio</a></li>
+      <li><a href="#quienes" class="block hover:underline">Quiénes somos</a></li>
+      <li><a href="#servicios" class="block hover:underline">Servicios</a></li>
+      <li><a href="#beneficiarios" class="block hover:underline">Beneficios</a></li>
+      <li><a href="#como-funciona" class="block hover:underline">Funcionalidad</a></li> <!-- texto cambiado -->
+      <li><a href="#contacto" class="block hover:underline">Contacto</a></li>
+    </ul>
+  </nav>
 
-  <!-- ENCABEZADO -->
-  <header>
-    <img src="logoct.jpg" alt="Logo Creditrab" />
-
-    <h1>Credito Digital para los Trabajadores</h1>
-
-    <p>Ideas y Soluciones para Crecer</p>
+  <!-- Header -->
+  <header id="inicio" class="bg-[#c99e22] text-white shadow p-10 text-center">
+    <h1 class="text-3xl font-bold mb-2">Crédito Digital para los Trabajadores</h1>
+    <p class="text-lg italic">Ideas y Soluciones para Crecer</p>
   </header>
 
-  <!-- QUIENES SOMOS -->
-  <section>
-    <h2>¿Quiénes somos?</h2>
+  <!-- Quiénes somos -->
+  <section id="quienes" class="relative overflow-hidden">
 
-    <p>
-      En <strong>CREDITRAB</strong>, ofrecemos soluciones financieras
-      innovadoras que permiten a trabajadores (emprendedores o comerciantes)
-      poder vender sus productos y/o servicios al crédito.
+  <!-- Imagen de fondo -->
+  <img src="edificio.jpg" alt="Fondo edificios"
+       class="absolute inset-0 w-full h-full object-cover">
 
-      Nos especializamos en tecnología financiera (FinTech) enfocada en
-      el bienestar social y laboral.
+  <!-- Capa oscura encima de la imagen para mejor contraste -->
+  
+  <!-- Solo aplica capa oscura en modo dark -->
+<div class="absolute inset-0 dark:bg-black/70"></div>
 
-      Nuestro principal propósito es apoyar al pequeño emprendedor y
-      pequeños comercios, facilitándoles una plataforma digital que les
-      dará acceso a un nicho de mercado único y seguro, como lo son los
-      trabajadores o empleados de empresas que estén afiliadas a nuestra
-      <strong>RED PATRONAL</strong>.
 
-      Los empleados de estas empresas también se beneficiarán de
-      <strong>CREDITRAB</strong>, ya que tendrán acceso sin costo alguno
-      a esta <strong>RED de POS VIRTUALES</strong>, donde podrán realizar
-      compras al crédito de productos de primera necesidad y todo aquel
-      producto o servicio que los emprendedores ofrezcan.
+  <!-- Contenido -->
+  <div class="relative z-10 flex items-center justify-center h-full">
+    <div class="p-6 rounded-xl max-w-3xl text-center bg-white/80 dark:bg-black/70">
+      <h2 class="text-4xl font-bold mb-4 text-black dark:text-white">¿Quiénes Somos?</h2>
+      <p class="text-lg text-gray-800 dark:text-gray-300">
+      En CREDITRAB ofrecemos soluciones digitales innovadoras que facilitan el crédito comercial en su modalidad e-commerce o presencial a todo tipo de comercio, mediante procesos automatizados que controlan y garantizan la recuperación del crédito. Nos especializamos en tecnología financiera (Fintech) con un enfoque en el bienestar social y laboral. Adicionalmente apoyamos a emprendedores mediante el acceso a nuestra plataforma digital, diseñada para conectar comercios con clientes institucionales, que incluyen empleados de empresas, afiliados a Cooperativas o miembros de gremios sociales organizados. Nuestra red de puntos de venta, son aquellos que ofrecen productos o servicios de primera necesidad, esenciales para la vida cotidiana de los trabajadores, priorizando los sectores de salud, alimentación, combustibles y bienes de consumo. Utilizamos tecnología de vanguardia, contamos con amplia experiencia en el sector financiero, con capacidad de crear nuevas opciones en medios de pago. Somos los pioneros en introducir un nuevo concepto de pago digital con nuestra TARJETA DIGITAL DE PLANILLA que no depende de una cuenta bancaria, sino del poder adquisitivo real del trabajador, basado en su salario liquido. Opera con mayor agilidad, eficacia y seguridad que las tarjetas tradicionales de Débito o Crédito.
     </p>
-  </section>
-
-  <!-- NUESTROS SERVICIOS -->
-  <section>
-    <h2>Nuestros servicios</h2>
-
-    <div class="servicios">
-
-      <!-- SERVICIO VPOS -->
-      <div class="servicio">
-
-        <h3>Puntos de Venta Virtual (VPOS)</h3>
-
-        <!--
-        <img src="logopos.jpg"
-             alt="Punto de Venta Virtual"
-             style="display:block; margin:0 auto 1rem;
-             max-width:300px; height:auto;" />
-        -->
-
-        <p>
-          Ofrecemos plataformas de venta digital que permiten a comercios
-          aceptar pagos sin necesidad de hardware físico.
-
-          Nuestra solución es rápida, segura y diseñada para pequeños
-          negocios. Control total desde una app móvil.
-        </p>
-
-        <a href="#"
-           class="boton"
-           onclick="alert('¡Este servicio estará disponible próximamente!'); return false;">
-          Afiliación de VPOS
-        </a>
-
-      </div>
-
-      <!-- SERVICIO VPC -->
-      <div class="servicio">
-
-        <h3>Tarjetas de Planilla Virtuales (VPC)</h3>
-
-        <!--
-        <img src="logocard.jpg"
-             alt="Tarjeta de Planilla Virtual"
-             style="display:block; margin:0 auto 1rem;
-             max-width:300px; height:auto;" />
-        -->
-
-        <p>
-          Proporcionamos tarjetas digitales para compras al crédito,
-          ideales para trabajadores que requieren cubrir necesidades
-          básicas o que no tienen acceso bancario tradicional.
-
-          Control total desde una app móvil.
-        </p>
-
-        <a href="#"
-           class="boton"
-           onclick="alert('¡Este servicio estará disponible próximamente!'); return false;">
-          Afiliación Patronos
-        </a>
-
-      </div>
-
+    <div class="bg-primary-50 dark:bg-gray-700 p-6 mt-6 rounded-lg border-l-4 border-brand">
+      <p class="text-gray-700 dark:text-gray-300 italic">
+        "Facilitamos el crédito a corto y largo plazo, generando automáticamente las cuotas correspondientes, en base al convenio entre comerciante y cliente.",
+      </p>
     </div>
   </section>
 
-  <!-- COMO FUNCIONA -->
-  <section>
-    <h2>¿Cómo funciona?</h2>
+<!-- SECCIÓN: Misión, Visión y Nuestros Valores -->
+<section class="bg-white dark:bg-gray-900 py-10">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-2xl font-bold text-brand mb-6">Conócenos</h2>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      
+      <button onclick="openModal('modal-mision')"
+              class="bg-brand text-white px-6 py-3 rounded-full hover:opacity-90 transition font-medium">
+        Misión
+      </button>
 
-    <p>
-      Nuestro sistema permite a los empleados de una empresa afiliada
-      realizar compras presenciales o remotas al crédito, con pagos
-      quincenales o mensuales.
+      <button onclick="openModal('modal-vision')"
+              class="bg-brand text-white px-6 py-3 rounded-full hover:opacity-90 transition font-medium">
+        Visión
+      </button>
 
-      Todo basado en tokens de código QR.
+      <button onclick="openModal('modal-valores')"
+              class="bg-brand text-white px-6 py-3 rounded-full hover:opacity-90 transition font-medium">
+        Nuestros Valores
+      </button>
+    </div>
+  </div>
+</section>
 
-      El monto se descontará directamente de la planilla de pago,
-      lo que garantiza seguridad tanto para el comercio como para
-      el cliente.
+<!-- MODALES -->
+<!-- Misión -->
+<div id="modal-mision" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md relative animate-fade-in">
+    <button onclick="closeModal('modal-mision')"
+            class="absolute top-3 right-4 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+    <h3 class="text-xl font-bold mb-3 text-brand">Nuestra Misión</h3>
+    <p class="text-gray-700 dark:text-gray-200 text-sm">
+      Conectar digitalmente a comercios con los empleados de diferentes instituciones para establecer una relación de crédito comercial a través de una plataforma digital ágil y segura que beneficie tanto al comercio como al trabajador.
+
+
     </p>
+  </div>
+</div>
 
-    <p>
-      Gracias a nuestra plataforma móvil, todo el proceso se gestiona
-      desde la palma de tu mano.
+<!-- Visión -->
+<div id="modal-vision" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md relative animate-fade-in">
+    <button onclick="closeModal('modal-vision')"
+            class="absolute top-3 right-4 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+    <h3 class="text-xl font-bold mb-3 text-brand">Nuestra Visión</h3>
+    <p class="text-gray-700 dark:text-gray-200 text-sm">
+      Ser la red digital de crédito comercial más grande del país donde cualquier emprendedor o comercio utilice nuestra plataforma para hacer crecer su negocio en beneficio de los trabajadores de Honduras.
+
+
     </p>
+  </div>
+</div>
+
+<!-- Valores -->
+<div id="modal-valores" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md relative animate-fade-in overflow-y-auto max-h-[80vh]">
+    <button onclick="closeModal('modal-valores')"
+            class="absolute top-3 right-4 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+    <h3 class="text-xl font-bold mb-3 text-brand">Nuestros Valores</h3>
+    
+    <ul class="text-gray-700 dark:text-gray-200 text-sm list-disc list-inside space-y-4 max-w-md mx-auto text-left">
+
+      <li class="flex items-start space-x-3">
+        <svg class="w-6 h-6 text-brand flex-shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" >
+          <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        <span><strong>Innovación</strong> – Creamos soluciones digitales para transformar el acceso al crédito comercial.</span>
+      </li>
+
+      <li class="flex items-start space-x-3">
+        <svg class="w-6 h-6 text-brand flex-shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M8 12l2 2 4-4" />
+        </svg>
+        <span><strong>Seguridad</strong> – Protegemos los datos y transacciones con tecnología de vanguardia.</span>
+      </li>
+
+      <li class="flex items-start space-x-3">
+        <svg class="w-6 h-6 text-brand flex-shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" >
+          <path d="M12 20h9" />
+          <path d="M12 4h9" />
+          <path d="M12 12h9" />
+          <path d="M3 6h.01" />
+          <path d="M3 18h.01" />
+          <path d="M3 12h.01" />
+        </svg>
+        <span><strong>Responsabilidad</strong> – Actuamos con integridad y seriedad con nuestros compromisos.</span>
+      </li>
+
+      <li class="flex items-start space-x-3">
+        <svg class="w-6 h-6 text-brand flex-shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" >
+          <path d="M18 2a6 6 0 0 0-6 6v4" />
+          <path d="M12 20a9 9 0 0 1-9-9" />
+          <circle cx="12" cy="14" r="4" />
+        </svg>
+        <span><strong>Respeto</strong> – Valoramos y tratamos con dignidad a todas las personas.</span>
+      </li>
+
+      <li class="flex items-start space-x-3">
+        <svg class="w-6 h-6 text-brand flex-shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" >
+          <path d="M12 2l3 7h7l-5.5 4.5 2 7-6-4-6 4 2-7L2 9h7z" />
+        </svg>
+        <span><strong>Energía</strong> – Trabajamos con pasión porque creemos en lo que hacemos.</span>
+      </li>
+
+      <li class="flex items-start space-x-3">
+        <svg class="w-6 h-6 text-brand flex-shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" >
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        <span><strong>Responsabilidad Social</strong> – Creamos soluciones para impulsar el crecimiento de emprendedores y mejorar la calidad de vida de los trabajadores.</span>
+      </li>
+
+    </ul>
+  </div>
+</div>
+
+<!-- SCRIPT para abrir/cerrar modales -->
+<script>
+  function openModal(id) {
+    document.getElementById(id).classList.remove('hidden');
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.add('hidden');
+  }
+
+  // Cerrar al hacer clic fuera
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+      if (!modal.classList.contains('hidden') && e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  });
+</script>
+
+
+
+  <!-- Servicios -->
+  <section id="servicios" class="bg-gray-100 dark:bg-gray-800 py-8">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-xl font-semibold text-brand mb-6">Nuestros servicios</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- VPOS -->
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow transition duration-300 ease-in-out transform hover:scale-105">
+          <i class="fa-solid fa-store text-brand text-2xl mb-3"></i>
+          <h3 class="text-lg font-bold text-brand mb-2">Puntos de Venta Virtual (VPOS)</h3>
+          <p class="mb-4">Ofrecemos POS Virtuales para facilitar la venta al crédito, ya sea presencial o e-commerce. Nuestra solución es rápida y segura. Diseñada para todo tipo de negocios. Control total desde tu celular.</p>
+          <a href="#" onclick="abrirFormulario('vpos'); return false;"
+
+             class="inline-block bg-brand text-white px-4 py-2 rounded hover:bg-yellow-700 transition duration-300 ease-in-out transform hover:scale-105">
+            <i class="fa-solid fa-plus mr-2"></i>Afiliación de VPOS
+          </a>
+        </div>
+        <!-- VPC -->
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow transition duration-300 ease-in-out transform hover:scale-105">
+          <i class="fa-solid fa-credit-card text-brand text-2xl mb-3"></i>
+          <h3 class="text-lg font-bold text-brand mb-2">Tarjetas Digitales de Planilla (VPC)</h3>
+          <p class="mb-4">Ofrecemos a los empleados de instituciones afiliadas, nuestra agil tarjeta digital para realizar compras al crédito, ya sea presencial o e-commerce. Control total desde tu celular.</p>
+          <a href="#" onclick="abrirFormulario('patronos'); return false;"
+             class="inline-block bg-brand text-white px-4 py-2 rounded hover:bg-yellow-700 transition duration-300 ease-in-out transform hover:scale-105">
+            <i class="fa-solid fa-briefcase mr-2"></i>Afiliación Empresas
+          </a>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- CONTACTO -->
-  <section>
-    <h2>Contacto</h2>
+<!-- Beneficios para Emprendedores -->
+<section id="beneficiarios" class="bg-gray-100 dark:bg-gray-800 py-10">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-xl font-semibold text-brand mb-6">Beneficios para los Comercios</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow text-center transition transform hover:scale-105">
+        <i class="fa-solid fa-cash-register text-brand text-3xl mb-4"></i>
+        <h3 class="text-lg font-bold mb-2">Ventas al crédito</h3>
+        <p>Amplía tus oportunidades de venta, unete a nuestra red permitiendo a los trabajadores pagar en cuotas.</p>
+      </div>
+      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow text-center transition transform hover:scale-105">
+        <i class="fa-solid fa-shield-halved text-brand text-3xl mb-4"></i>
+        <h3 class="text-lg font-bold mb-2">Cero riesgo de mora</h3>
+        <p>El sistema asegura el cobro automático desde la planilla del empleado. Tú vendes, nosotros trabajamos para ti.</p>
+      </div>
+      <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow text-center transition transform hover:scale-105">
+        <i class="fa-solid fa-rocket text-brand text-3xl mb-4"></i>
+        <h3 class="text-lg font-bold mb-2">Impulsa tu negocio</h3>
+        <p>Automatiza tus ventas al credito, llega a más clientes y mejora tu presencia digital sin necesidad de grandes inversiones.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+
+  <!-- Beneficios -->
+  <section id="beneficios-empleados" class="bg-gray-100 dark:bg-gray-800 py-10"> 
+  
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-xl font-semibold text-brand mb-6">Beneficios para los Empleados</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow text-center transition transform hover:scale-105">
+          <i class="fa-solid fa-file-invoice-dollar text-brand text-3xl mb-4"></i>
+          <h3 class="text-lg font-bold mb-2">Facilidad de Compra</h3>
+          <p>Compra via Codigo QR presencial o remoto, Pagos automáticos con deduccion de planilla, sin papeleos, ni gestiones engorrosas.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow text-center transition transform hover:scale-105">
+          <i class="fa-solid fa-percent text-brand text-3xl mb-4"></i>
+          <h3 class="text-lg font-bold mb-2">Productos de primera necesidad</h3>
+          <p>Priorizamos sectores de salud, alimentación y combustibles. Cubre tus nececidades sin pagar interéses. Tus emergencias son nuestra prioridad.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow text-center transition transform hover:scale-105">
+          <i class="fa-solid fa-bell-slash text-brand text-3xl mb-4"></i>
+          <h3 class="text-lg font-bold mb-2">Sin moras</h3>
+          <p>Olvídate de la central de riesgos. Nuestro sistema de deducción por planilla evita cualquier mora.</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo funciona -->
+  <section id="como-funciona" class="max-w-5xl mx-auto p-6">
+    <h2 class="text-xl font-semibold text-brand mb-4">¿Cómo funciona?</h2>
+    <p class="mb-4">Comprar con nuestro sistema es muy sencillo, simplemente presenta tu codigo QR al POS donde compres, ya sea presencial o remoto y listo. Nuestros <strong>VPOS</strong> registran facilmente estas transacciones, para luego descontar quincenal o mensual los montos directamente de la planilla de pago del empleado, lo que garantiza seguridad tanto para el comercio como para el trabajador.</p>
+    <button onclick="document.getElementById('videoModal').classList.remove('hidden');"
+            class="bg-brand text-white px-4 py-2 rounded hover:bg-yellow-700 transition duration-300 ease-in-out transform hover:scale-105">
+      <i class="fa-solid fa-play mr-2"></i>Ver Video Ilustrativo
+    </button>
+
+    <div class="bg-primary-50 dark:bg-gray-700 p-6 mt-6 rounded-lg border-l-4 border-brand">
+      <p class="text-gray-700 dark:text-gray-300 italic">
+        "Gracias a nuestra plataforma móvil, todo el proceso se gestiona desde la palma de tu mano."
+      </p>
+    </div>
+
+    <div class="bg-primary-50 dark:bg-gray-700 p-6 mt-6 rounded-lg border-l-4 border-brand">
+      <p class="text-gray-700 dark:text-gray-300 italic">
+        "Contamos con tres modelos de negocio, Planillas de Empleados, Planillas de Clientes y Planilla Financiera. Descubre con nosotros todas estas opciones."
+      </p>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50 transition-opacity duration-300">
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-lg max-w-2xl w-full">
+        <div class="flex justify-end">
+          <button onclick="document.getElementById('videoModal').classList.add('hidden');"
+                  class="text-white bg-red-500 hover:bg-red-600 rounded-full w-8 h-8 flex items-center justify-center">&times;</button>
+        </div>
+        <video controls class="w-full max-h-96 bg-black">
+          <source src="Video01.mp4" type="video/mp4">
+          Tu navegador no soporta la reproducción de video.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="max-w-5xl mx-auto p-6">
+    <h2 class="text-xl font-semibold text-brand mb-4">Contacto</h2>
     <p>
-      ¿Te interesa colaborar con nosotros o usar nuestros servicios?
-
-      Escríbenos a
-      <a href="mailto:contacto@creditrab.com">
-        contacto@creditrab.com
-      </a>
+      ¿Te interesa colaborar con nosotros o usar nuestros servicios? Escríbenos a
+      <a href="mailto:contacto@creditrab.com" class="text-brand underline">contacto@creditrab.com</a>
       y con gusto te responderemos.
     </p>
   </section>
 
-  <!-- PIE DE PAGINA -->
-  <footer>
-    Copyright &copy; 2026 Datos y Aplicaciones en Línea
+  <!-- Botón flotante de contacto -->
+  <a href="mailto:contacto@creditrab.com" class="fixed bottom-6 right-6 bg-brand text-white p-3 rounded-full shadow-lg hover:bg-yellow-700 transition">
+    <i class="fa-solid fa-envelope text-xl"></i>
+  </a>
+
+   <!-- Redes Sociales -->
+<section class="bg-white dark:bg-gray-900 py-6 border-t border-gray-200 dark:border-gray-700">
+  <div class="max-w-5xl mx-auto text-center">
+    <h3 class="text-lg font-semibold text-brand mb-4">Síguenos en nuestras redes</h3>
+    <div class="flex justify-center space-x-6 text-brand text-2xl">
+      <a href="https://facebook.com/creditrab" target="_blank" aria-label="Facebook" class="hover:text-blue-600 transition">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://instagram.com/creditrab" target="_blank" aria-label="Instagram" class="hover:text-pink-500 transition">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://twitter.com/creditrab" target="_blank" aria-label="Twitter" class="hover:text-sky-400 transition">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://linkedin.com/company/creditrab" target="_blank" aria-label="LinkedIn" class="hover:text-blue-700 transition">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://wa.me/1234567890" target="_blank" aria-label="WhatsApp" class="hover:text-green-500 transition">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+
+      <button onclick="document.getElementById('creditrab-popup').classList.remove('hidden')"
+        class="bg-brand text-white px-4 py-2 rounded-full hover:opacity-90 transition text-sm font-medium">
+  Suscripciones
+</button>
+
+
+
+    </div>
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer class="bg-brand text-white text-center py-4 mt-8">
+    &copy; 2025 Datos y Aplicaciones en Línea
+  
   </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      const menu = document.getElementById('mobileMenu');
+      if (menu.classList.contains('max-h-0')) {
+        menu.classList.remove('max-h-0');
+        menu.classList.add('max-h-60');
+      } else {
+        menu.classList.add('max-h-0');
+        menu.classList.remove('max-h-60');
+      }
+    });
+
+    const themeToggle = document.getElementById('themeToggle');
+    const icon = themeToggle.querySelector('i');
+    const root = document.documentElement;
+
+    // Iniciar siempre en modo oscuro por defecto
+root.classList.add('dark');
+
+icon.classList.remove('fa-moon');
+icon.classList.add('fa-sun');
+
+localStorage.setItem('theme', 'dark');
+
+    themeToggle.addEventListener('click', () => {
+      root.classList.toggle('dark');
+      const isDark = root.classList.contains('dark');
+      icon.classList.toggle('fa-moon', !isDark);
+      icon.classList.toggle('fa-sun', isDark);
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+
+
+
+<!-- Modal Formulario -->
+<div id="formModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center">
+  <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-xl relative">
+    <button onclick="cerrarFormulario()" class="absolute top-2 right-2 text-white bg-red-500 hover:bg-red-600 rounded-full w-8 h-8 flex items-center justify-center">
+      &times;
+    </button>
+
+    <!-- Formulario VPOS -->
+    <form id="formVPOS" class="hidden space-y-4" action="https://formsubmit.co/afiliaciones@creditrab.com" method="POST">
+      <h2 class="text-xl font-semibold text-brand mb-2">Afiliación de VPOS</h2>
+      <input type="text" name="nombre" placeholder="Tu nombre" required class="w-full p-2 border border-gray-300 rounded">
+      <input type="email" name="correo" placeholder="Tu correo electrónico" required class="w-full p-2 border border-gray-300 rounded">
+      <input type="tel" name="telefono" placeholder="Tu número de celular" required class="w-full p-2 border border-gray-300 rounded">
+
+      <input type="text" name="nombre_comercio" placeholder="Nombre del comercio" required class="w-full p-2 border border-gray-300 rounded">
+      <textarea name="mensaje" placeholder="¿Qué tipo de productos vendes?" required class="w-full p-2 border border-gray-300 rounded"></textarea>
+      <input type="hidden" name="_next" value="https://creditrab.com/gracias.html">
+      <input type="hidden" name="_subject" value="Nueva solicitud de afiliación VPOS">
+      <button type="submit" class="bg-brand text-white px-4 py-2 rounded hover:bg-yellow-700">Enviar</button>
+    </form>
+
+    <!-- Formulario Patronos -->
+    <form id="formPatronos" class="hidden space-y-4" action="https://formsubmit.co/afiliaciones@creditrab.com" method="POST">
+      <h2 class="text-xl font-semibold text-brand mb-2">Afiliación de Empresas</h2>
+      <input type="text" name="nombre" placeholder="Nombre del representante" required class="w-full p-2 border border-gray-300 rounded">
+      <input type="email" name="correo" placeholder="Correo electrónico" required class="w-full p-2 border border-gray-300 rounded">
+      <input type="text" name="empresa" placeholder="Nombre de la empresa" required class="w-full p-2 border border-gray-300 rounded">
+      <input type="text" name="jefe_rrhh" required placeholder="Nombre del Jefe de Recursos Humanos" class="w-full p-2 border rounded">
+      <input type="email" name="correo_rrhh" required placeholder="Correo del Jefe de Recursos Humanos" class="w-full p-2 border rounded">
+      <input type="tel" name="telefono" placeholder="Número de celular" required class="w-full p-2 border border-gray-300 rounded">
+
+      <textarea name="mensaje" placeholder="Número de empleados, interés en el servicio, etc." required class="w-full p-2 border border-gray-300 rounded"></textarea>
+      <input type="hidden" name="_next" value="https://creditrab.com/gracias.html">
+      <input type="hidden" name="_subject" value="Nueva solicitud de afiliación Patronos">
+      <button type="submit" class="bg-brand text-white px-4 py-2 rounded hover:bg-yellow-700">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function abrirFormulario(tipo) {
+    // Oculta ambos formularios
+    document.getElementById('formVPOS').classList.add('hidden');
+    document.getElementById('formPatronos').classList.add('hidden');
+
+    // Muestra el correcto
+    if (tipo === 'vpos') {
+      document.getElementById('formVPOS').classList.remove('hidden');
+    } else if (tipo === 'patronos') {
+      document.getElementById('formPatronos').classList.remove('hidden');
+    }
+
+    // Abre modal
+    document.getElementById('formModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function cerrarFormulario() {
+    document.getElementById('formModal').classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+</script>
+
+
+
+
+<script src="https://cdn.counter.dev/script.js" data-id="3dba4671-74be-4c24-8f8a-f417bac7d984" data-utcoffset="-6"></script>
+
+</div>
+
+
+<!-- Modal de suscripción oculto -->
+<div id="creditrab-popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+
+    <!-- Botón cerrar -->
+    <button onclick="document.getElementById('creditrab-popup').classList.add('hidden')"
+            class="absolute top-3 right-4 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+
+    <h2 class="text-xl font-bold text-gray-800 mb-2">Suscríbete a CREDITRAB</h2>
+    <p class="text-gray-600 text-sm mb-4">Recibe actualizaciones, beneficios y promociones directamente en tu correo.</p>
+
+    <form action="https://formspree.io/f/xanjgwoe" method="POST" class="space-y-3">
+      <input type="email" name="email" required
+             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+             placeholder="Tu correo electrónico">
+
+      <label class="flex items-start gap-2 text-sm text-gray-700">
+        <input type="checkbox" required class="mt-1">
+        Acepto recibir correos de CREDITRAB con fines informativos y promocionales.
+      </label>
+
+      <button type="submit"
+              class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition">
+        Suscribirme
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+</script>
+
+
 
 </body>
 </html>
